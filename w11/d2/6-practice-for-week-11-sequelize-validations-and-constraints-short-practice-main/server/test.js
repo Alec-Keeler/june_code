@@ -69,7 +69,7 @@ const { Color } = require('./db/models');
   // Test: successfully added
   console.log('Fifth Test - valid name:')
   try {
-    await Color.create({name: 'orange'})
+    await Color.create({name: 'Orange'})
     console.log('Result: Successfully Allowed Valid Data\n')
   } catch (err) {
     err.errors.forEach(err => {

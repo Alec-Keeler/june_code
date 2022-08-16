@@ -4,7 +4,7 @@ module.exports = {
     dialect: "sqlite",
     seederStorage: "sequelize",
     benchmark: true,
-    // logQueryParameters: true,
+    logQueryParameters: true,
     typeValidation: true,
     // logging: false
   },
