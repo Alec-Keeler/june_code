@@ -14,6 +14,7 @@ const { Op } = require("sequelize");
 // Express using json - DO NOT MODIFY
 app.use(express.json());
 
+// findAll, findOne, findByPk
 
 // STEP 1
 // All puppies in the database
@@ -22,6 +23,9 @@ app.get('/puppies', async (req, res, next) => {
     let allPuppies;
 
     // Your code here
+    allPuppies = await Puppy.findAll({
+        order: [['name', 'ASC']]
+    })
 
     res.json(allPuppies);
 });
@@ -34,6 +38,12 @@ app.get('/puppies/chipped', async (req, res, next) => {
     let chippedPuppies;
 
     // Your code here
+    chippedPuppies = await Puppy.findAll({
+        where: {
+            microchipped: true
+        },
+        order: [['age_yrs', 'DESC'], ['name']]
+    })
 
     res.json(chippedPuppies);
 });
@@ -46,8 +56,22 @@ app.get('/puppies/name/:name', async (req, res, next) => {
     let puppyByName;
     
     // Your code here
+    // findAll would technically be better
+    puppyByName = await Puppy.findOne({
+        where: {
+            name: req.params.name
+        }
+    })
 
-    res.json(puppyByName);
+    if (!puppyByName) {
+        return res.json({
+            message: "This puppy could not be found",
+            status: 404
+        })
+    } else {
+        res.json(puppyByName);
+    }
+
 })
 
 
@@ -58,6 +82,14 @@ app.get('/puppies/shepherds', async (req, res, next) => {
     let shepherds;
     
     // Your code here
+    shepherds = await Puppy.findAll({
+        where: {
+            breed: {
+                [Op.like]: '%Shepherd'
+            }
+        },
+        order: [['name', 'DESC']]
+    })
 
     res.json(shepherds);
 })
@@ -71,6 +103,17 @@ app.get('/puppies/tinybabies', async (req, res, next) => {
     
     // Your code here
 
+    tinyBabyPuppies = await Puppy.findAll({
+        where: {
+            age_yrs: {
+                [Op.lt]: 1
+            },
+            weight_lbs: {
+                [Op.lt]: 20
+            }
+        },
+        order: [['age_yrs'], ['weight_lbs']]
+    })
     res.json(tinyBabyPuppies);
 })
 
@@ -82,6 +125,9 @@ app.get('/puppies/:id', async (req, res, next) => {
     let puppyById;
     
     // Your code here
+    puppyById = await Puppy.findByPk(req.params.id, {
+        // attributes: ['name', 'age_yrs']
+    })
     
     res.json(puppyById);
 });

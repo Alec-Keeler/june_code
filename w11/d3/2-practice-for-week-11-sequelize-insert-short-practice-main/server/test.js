@@ -23,6 +23,15 @@ const { Puppy } = require('./db/models');
   // microchipped: false
   try {
     // Your code here
+    const puppy = Puppy.build({
+      name: 'Trudy',
+      age_yrs: 2,
+      weight_lbs: 38,
+      breed: 'Brittany Spaniel',
+      microchipped: false
+    })
+
+    await puppy.save()
   } catch (err) {
     console.error(err)
   }
@@ -37,6 +46,13 @@ const { Puppy } = require('./db/models');
   // microchipped: true
   try {
     // Your code here
+    const puppy = await Puppy.create({
+      name: 'Trudy',
+      age_yrs: 2,
+      weight_lbs: 38,
+      breed: 'Brittany Spaniel',
+      microchipped: false
+    })
   } catch (err) {
     console.error(err)
   }

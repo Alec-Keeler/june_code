@@ -11,6 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Your code here
+      // related to one band
+      Musician.belongsTo(models.Band, {foreignKey: 'bandId'})
+      Musician.belongsToMany(models.Instrument, {
+        through: 'MusicianInstrument',
+        foreignKey: 'musicianId',
+        otherKey: 'instrumentId'
+      })
+      // Musician.belongsTo(models.Instrument, {
+      //   as: 'MuscianBelongsTo'
+      // })
     }
   };
   Musician.init({
