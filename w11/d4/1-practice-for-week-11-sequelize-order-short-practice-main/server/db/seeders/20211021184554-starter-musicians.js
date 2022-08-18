@@ -22,7 +22,8 @@ const bandMusicians = [
   {
     name: 'Loved Autumn',
     musicians: [
-      { firstName: 'Aurora', lastName: 'Hase' }
+      { firstName: 'Aurora', lastName: 'Hase' },
+      { firstName: 'Raymond', lastName: 'Holt' }
     ]
   },
   {
